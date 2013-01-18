@@ -26,7 +26,9 @@
         autoStart: false,
         mainContent: false,
         fadeTo: 0.8,
-        showMasks: true
+        showMasks: true,
+        helpTitle: 'Tips: use left|right arrow keys to navigate, esc to close it and ? key to open it',
+        showHelp: true
       };
 
       PageTour.prototype.started = false;
@@ -79,6 +81,9 @@
         var o;
         o = this.options;
         this.masks.wrapper = $("<div class='" + o.prefix + "-mask-wrapper'></div>");
+        if (o.showHelp) {
+          this.masks.wrapper.append($("<div class='" + o.prefix + "-mask-help' title='" + o.helpTitle + "'>?</div>"));
+        }
         this.masks.top = $("<div class='" + o.prefix + "-mask-top'></div>");
         this.masks.left = $("<div class='" + o.prefix + "-mask-left'></div>");
         this.masks.right = $("<div class='" + o.prefix + "-mask-right'></div>");
@@ -149,14 +154,13 @@
         var bottomTop, o;
         bottomTop = position.y + size.y;
         o = this.options;
-        log(this.documentHeight);
         if (this.options.showMasks) {
           this.masks.top.css({
             top: 0,
             height: position.y - (this.currentStepElement.padding || 0)
           }).fadeTo(100, o.fadeTo);
           this.masks.bottom.css({
-            height: this.documentHeight - bottomTop,
+            height: this.documentHeight - bottomTop - (this.currentStepElement.padding || 0),
             top: bottomTop + (this.currentStepElement.padding || 0)
           }).fadeTo(100, o.fadeTo);
           this.masks.left.css({
