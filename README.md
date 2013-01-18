@@ -1,8 +1,17 @@
 # jQuery pageTour
 
-## A _tooltipized_ guide for your website/webapp. Integrate it in a blink of an eye!
+### A _tooltipized_ guide for your website/webapp. Integrate it in a blink of an eye!
 
-#### To use it, create a simple array of steps:
+**Features**:
+  * Keyboard keys navigation
+  * Tooltip personalization
+  * Mask to highlight the current step
+  * Easy integration
+  * Auto smooth-scroll
+  * Totally CSS-styleable elements
+  * Events control
+
+## To use it, create a simple array of steps:
 
 ```JavaScript
   // a step is an Object:
@@ -22,21 +31,32 @@
   my_page_guide.start();
 ```
 
-#### Options
+## Options
 
-* ```prefix : 'pagetour' // needed for css and custom events, default set to 'pagetour' ```
-* ```labelNext : 'next' // next step label, default set to 'next' ```
-* ```labelPrev : 'prev' // next step label, default set to 'prev' ```
-* ```labelFinish : 'done!' // laste step done label, default set to 'done!' ```
-* ```labelHideAll : 'x' // close the tour label, default set to 'x'.. can also be an img, by css ```
-* ```autoStart : false // if you want to automatically start the tour, default set to false```
-* ```fadeTo : 0.8 // target opacity for the mask, default set to 0.8```
-* ```showMasks : true // if you want to show mask or not, default set to true```
+* `prefix : 'pagetour'` _needed for css and custom events, default set to 'pagetour'_
+
+* `labelNext : 'next'` _next step label, default set to 'next'_
+
+* `labelPrev : 'prev'` _prev step label, default set to 'prev'
+
+* `labelFinish : 'done!'`_laste step done label, default set to 'done!'_
+ 
+* `labelHideAll : 'x'` _close the tour label, default set to 'x'.. can also be an img, by css_
+
+* `autoStart : false` _if you want to automatically start the tour, default set to false_
+
+* `fadeTo : 0.8` _target opacity for the mask, default set to 0.8_
+
+* `showMasks : true` _if you want to show mask or not, default set to true_
+ 
+* `helpTitle : 'Tips: use left|right arrow keys to navigate, esc to close it and ? key to open it'` _self explanatory_
+
+* `showHelp : true` _see above_
 
   To override default options, just pass as second argument an object with your custom options
 
-#### Events
+## Events
   coming soon
 
-#### Styling
+## Styling
   coming soon
