@@ -15,28 +15,31 @@
 
   class PageTour
   
-    #default options
+    # default options
     options : 
-      prefix : 'pagetour' # needed for css and custom events
-      labelNext : 'next'
-      labelPrev : 'prev'
-      labelFinish : 'Done!'
-      labelHideAll : 'x'
-      autoStart : false
-      mainContent : false
-      fadeTo : 0.8
-      showMasks : true
+      prefix        : 'pagetour' # needed for css and custom events
+      labelNext     : 'next'
+      labelPrev     : 'prev'
+      labelFinish   : 'Done!'
+      labelHideAll  : 'x'
+      autoStart     : false
+      mainContent   : false
+      fadeTo        : 0.8
+      showMasks     : true
+      helpTitle     : 'Tips: use left|right arrow keys to navigate, esc to close it and ? key to open it'
+      showHelp      : true
   
     # not started yet...
     started : false
   
-    # the masks...
+    # cache masks (top, bottom, left, right)
     masks : {}
-  
-    currentStep : -1
-    currentElement : null
+    
+    # some instance props
+    currentStep        : -1
+    currentElement     : null
     currentStepElement : null
-    documentHeight : 0 #once guide starts(is opened), document height should always be constant
+    documentHeight     : 0 # once guide starts (is opened), document height should always be constant (but not on window resizing, see recalculate method)
   
     ###
     *
@@ -77,6 +80,7 @@
       o = @options
 
       @masks.wrapper = $("<div class='#{o.prefix}-mask-wrapper'></div>")
+      @masks.wrapper.append($("<div class='#{o.prefix}-mask-help' title='#{o.helpTitle}'>?</div>")) if o.showHelp
       @masks.top = $("<div class='#{o.prefix}-mask-top'></div>")
       @masks.left = $("<div class='#{o.prefix}-mask-left'></div>")
       @masks.right = $("<div class='#{o.prefix}-mask-right'></div>")
