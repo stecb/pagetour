@@ -160,8 +160,6 @@
       bottomTop = position.y + size.y
       o         = this.options
       
-      log @documentHeight
-      
       if this.options.showMasks
 
         @masks.top.css
@@ -170,7 +168,7 @@
         .fadeTo(100, o.fadeTo)
 
         @masks.bottom.css
-          height : @documentHeight - bottomTop
+          height : @documentHeight - bottomTop - (@currentStepElement.padding || 0)
           top : bottomTop + (@currentStepElement.padding || 0)
         .fadeTo(100, o.fadeTo)
 
