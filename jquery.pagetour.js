@@ -8,7 +8,7 @@
   @author  Stefano Ceschi Berrini <stefano.ceschib@gmail.com> @stecb
   @link    https://github.com/stecb/pagetour
   @license http://opensource.org/licenses/MIT
-  @version 0.2.1
+  @version 0.2.2
 */
 
 (function() {
