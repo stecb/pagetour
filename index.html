@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Pagetour by stecb</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Pagetour</h1>
+          <h2>A simple guide tour for your webapp</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/stecb/pagetour/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/stecb/pagetour/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/stecb/pagetour" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>jQuery pageTour</h1>
+
+<h2>A <em>tooltipized</em> guide for your website/webapp. Integrate it in a blink of an eye!</h2>
+
+<h4>To use it, create a simple array of steps:</h4>
+
+<div class="highlight"><pre>  <span class="c1">// a step is an Object:</span>
+  <span class="kd">var</span> <span class="nx">step_one</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">'selector'</span> <span class="o">:</span> <span class="s1">'#element_id'</span> <span class="c1">// or whatever selector (must match 1 and only 1 element of the DOM)</span>
+    <span class="p">,</span> <span class="s1">'description'</span> <span class="o">:</span> <span class="s1">'The guide text/html for that particular element'</span>
+    <span class="cm">/* optional */</span>
+    <span class="p">,</span> <span class="s1">'position'</span> <span class="o">:</span> <span class="s1">'left|right|top|bottom'</span> <span class="c1">// if you want to override the *smart* calculation and force the position of the guide tooltip</span>
+    <span class="p">,</span> <span class="s1">'padding'</span> <span class="o">:</span> <span class="nb">Number</span> <span class="c1">// &gt; 0 ..if you want to give some padding to the current step element, i.e. if the selector matches a label/link</span>
+    <span class="p">,</span> <span class="s1">'offsetLeft'</span> <span class="o">:</span> <span class="nb">Number</span> <span class="c1">// Can be negative. Force the tooltip to move X px to the left</span>
+    <span class="p">,</span> <span class="s1">'offsetTop'</span> <span class="o">:</span> <span class="nb">Number</span> <span class="c1">// Can be negative. Force the tooltip to move X px to the top</span>
+  <span class="p">};</span>
+
+  <span class="c1">// once you created your array of steps, just instantiate your guide:</span>
+  <span class="kd">var</span> <span class="nx">my_page_guide</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">pageTour</span><span class="p">([</span><span class="nx">step_one</span><span class="p">,</span> <span class="nx">step_two</span> <span class="cm">/* ... */</span><span class="p">],</span> <span class="p">{</span><span class="cm">/* options */</span><span class="p">});</span>
+  <span class="c1">// start it</span>
+  <span class="nx">my_page_guide</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
+
+<h4>Options</h4>
+
+<ul>
+<li><code>prefix : 'pagetour' // needed for css and custom events, default set to 'pagetour'</code></li>
+<li><code>labelNext : 'next' // next step label, default set to 'next'</code></li>
+<li><code>labelPrev : 'prev' // next step label, default set to 'prev'</code></li>
+<li><code>labelFinish : 'done!' // laste step done label, default set to 'done!'</code></li>
+<li><code>labelHideAll : 'x' // close the tour label, default set to 'x'.. can also be an img, by css</code></li>
+<li><code>autoStart : false // if you want to automatically start the tour, default set to false</code></li>
+<li><code>fadeTo : 0.8 // target opacity for the mask, default set to 0.8</code></li>
+<li>
+<p><code>showMasks : true // if you want to show mask or not, default set to true</code></p>
+
+<p>To override default options, just pass as second argument an object with your custom options</p>
+</li>
+</ul><h4>Events</h4>
+
+<p>coming soon</p>
+
+<h4>Styling</h4>
+
+<p>coming soon</p>
+        </section>
+
+        <footer>
+          Pagetour is maintained by <a href="https://github.com/stecb">stecb</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
