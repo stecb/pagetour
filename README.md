@@ -1,8 +1,6 @@
 # jQuery pageTour
 
-## A _tooltipized_ guide for your website/webapp. Implement it a blink of an eye!
-
-### *Important:* Demo + Css coming soon! (see template inside the code if you don't want to wait)
+## A _tooltipized_ guide for your website/webapp. Integrate it in a blink of an eye!
 
 #### To use it, create a simple array of steps:
 
