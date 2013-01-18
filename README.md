@@ -1,10 +1,8 @@
-# PageTour
+# jQuery pageTour
 
 ## A _tooltipized_ guide for your website/webapp. Implement it a blink of an eye!
 
-### **Important:** Demo + Css coming soon! (see template inside the code if you don't want to wait)
-
----
+### *Important:* Demo + Css coming soon! (see template inside the code if you don't want to wait)
 
 #### To use it, create a simple array of steps:
 
@@ -28,14 +26,19 @@
 
 #### Options
 
-* ```prefix : String``` // needed for css and custom events, default set to 'pagetour'
-* ```labelNext : String``` // next step label, default set to 'next'
-* ```labelPrev : String``` // next step label, default set to 'prev'
-* ```labelFinish : String``` // next step label, default set to 'Done!'
-* labelHideAll : 'x'
-* autoStart : false
-* mainContent : false
-* fadeTo : 0.8
-* showMasks : true
+* ```prefix : 'pagetour' // needed for css and custom events, default set to 'pagetour' ```
+* ```labelNext : 'next' // next step label, default set to 'next' ```
+* ```labelPrev : 'prev' // next step label, default set to 'prev' ```
+* ```labelFinish : 'done!' // laste step done label, default set to 'done!' ```
+* ```labelHideAll : 'x' // close the tour label, default set to 'x'.. can also be an img, by css ```
+* ```autoStart : false // if you want to automatically start the tour, default set to false```
+* ```fadeTo : 0.8 // target opacity for the mask, default set to 0.8```
+* ```showMasks : true // if you want to show mask or not, default set to true```
 
+  To override default options, just pass as second argument an object with your custom options
 
+#### Events
+  coming soon
+
+#### Styling
+  coming soon
