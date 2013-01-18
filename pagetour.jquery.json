@@ -1,0 +1,30 @@
+{
+  "name": "pagetour",
+  "title": "jQuery Pagetour",
+  "description": "jQuery plugin for easily creating websites guided tours.",
+  "keywords": [
+    "tour",
+    "page",
+    "ui",
+    "website",
+    "guide"
+  ],
+  "version": "0.2.1",
+  "author": {
+    "name": "Stefano Ceschi Berrini",
+    "url": "http://stecb.me",
+    "email": "stefano.ceschib@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "bugs": "https://github.com/stecb/pagetour/issues",
+  "homepage": "https://github.com/stecb/pagetour",
+  "docs": "https://github.com/stecb/pagetour",
+  "dependencies": {
+    "jquery": ">=1.4"
+  }
+}
