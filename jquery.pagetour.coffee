@@ -2,12 +2,12 @@
 
   PageTour: A guide through your website. In a simple and effective way!
 
-  Copyright 2013, Stefano Ceschi Berrini
+  (c) 2013, Stefano Ceschi Berrini
   
   @author  Stefano Ceschi Berrini <stefano.ceschib@gmail.com> @stecb
   @link    https://github.com/stecb/pagetour
   @license http://opensource.org/licenses/MIT
-  @version 0.2.2
+  @version 0.3.1
   
 ###
 
@@ -20,14 +20,15 @@
       prefix        : 'pagetour' # needed for css and custom events
       labelNext     : 'next'
       labelPrev     : 'prev'
-      labelFinish   : 'Done!'
-      labelHideAll  : 'x'
+      labelFinish   : 'done'
+      labelHideAll  : '&times;'
       autoStart     : false
       mainContent   : false
       fadeTo        : 0.8
       showMasks     : true
-      helpTitle     : 'Tips: use left|right arrow keys to navigate, esc to close it and ? key to open it'
+      helpTitle     : 'tips'
       showHelp      : true
+      defaultPadding : 2
   
     # not started yet...
     started : false
@@ -107,14 +108,25 @@
                       <h3 class="popover-title"></h3>
                       <div class="#{o.prefix}-step-tooltip-content popover-content"><p class="#{o.prefix}-step-tooltip-description"></p></div>
                       <div class="#{o.prefix}-step-tooltip-controls">
-                        <a href='#' class='arrowed floatright reverse #{o.prefix}-step-next'>#{o.labelNext}</a>
-                        <a href='#' class='arrowed floatright reverse #{o.prefix}-step-close'>#{o.labelFinish}</a>
-                        <a href='#' class='arrowed leftarrow reverse #{o.prefix}-step-prev'>#{o.labelPrev}</a>
+                        <a href='#' class='btn btn-small floatright #{o.prefix}-step-next'>
+                          #{o.labelNext}
+                          <i class='icon-arrow-right'></i>
+                        </a>
+                        <a href='#' class='btn btn-small floatright #{o.prefix}-step-close'>
+                          <i class='icon-thumbs-up'></i>
+                          #{o.labelFinish}
+                        </a>
+                        <a href='#' class='btn btn-small #{o.prefix}-step-prev'>
+                          <i class='icon-arrow-left'></i>
+                          #{o.labelPrev}
+                        </a>
                       </div>
                   </div>
                   """
       @tooltip = $(tooltipTpl)
-      @tooltip.find(".#{o.prefix}-step-hide").tooltip()
+      @tooltip.find(".#{o.prefix}-step-hide").tooltip
+        animation: false
+        container: 'body'
       @masks.wrapper.append(@tooltip)
   
     ###
@@ -168,24 +180,24 @@
 
         @masks.top.css
           top : 0
-          height : position.y - (@currentStepElement.padding || 0)
+          height : position.y - (@currentStepElement.padding || o.defaultPadding)
         .fadeTo(100, o.fadeTo)
 
         @masks.bottom.css
-          height : @documentHeight - bottomTop - (@currentStepElement.padding || 0)
-          top : bottomTop + (@currentStepElement.padding || 0)
+          height : @documentHeight - bottomTop - (@currentStepElement.padding || o.defaultPadding)
+          top : bottomTop + (@currentStepElement.padding || o.defaultPadding)
         .fadeTo(100, o.fadeTo)
 
         @masks.left.css
-          height : size.y + ((@currentStepElement.padding || 0) * 2)
-          top : position.y - (@currentStepElement.padding || 0)
-          width : position.x - (@currentStepElement.padding || 0)
+          height : size.y + ((@currentStepElement.padding || o.defaultPadding) * 2)
+          top : position.y - (@currentStepElement.padding || o.defaultPadding)
+          width : position.x - (@currentStepElement.padding || o.defaultPadding)
         .fadeTo(100, o.fadeTo)
 
         @masks.right.css
-          height : size.y + ((@currentStepElement.padding || 0) * 2)
-          top : position.y - (@currentStepElement.padding || 0)
-          width: $(document.body).width() - position.x - size.x - (@currentStepElement.padding || 0)
+          height : size.y + ((@currentStepElement.padding || o.defaultPadding) * 2)
+          top : position.y - (@currentStepElement.padding || o.defaultPadding)
+          width: $(document.body).width() - position.x - size.x - (@currentStepElement.padding || o.defaultPadding)
         .fadeTo(100, o.fadeTo)
 
       @_setTooltip(position, size)
@@ -221,7 +233,15 @@
     _setTooltipPosition : ( size, position ) ->
     
       pos = @currentStepElement.position
-    
+      fixed = @currentStepElement.fixed
+      
+      if !!fixed
+        [@masks.top, @masks.bottom, @masks.left, @masks.right, @tooltip].forEach (el) ->
+          el.addClass('fixed')
+      else
+        [@masks.top, @masks.bottom, @masks.left, @masks.right, @tooltip].forEach (el) ->
+          el.removeClass('fixed')
+        
       # if no position override is given (or top/bottom), do automagically
       if typeof pos is 'undefined' or pos is 'top' or pos is 'bottom'
     
@@ -291,25 +311,32 @@
       _tmp_last_step = @currentStepElement
     
       currStep = @steps[@currentStep]
-
+      winTop = $(window).scrollTop()
+      
       @currentStepElement = currStep
       @currentElement = $(currStep.selector)
     
       if @currentElement.length isnt 0
-    
+
         originalPosition = @currentElement.offset()
         marginTop        = if typeof currStep.margin_top isnt 'undefined' then currStep.margin_top else 0
         marginBottom     = if typeof currStep.margin_bottom isnt 'undefined' then currStep.margin_bottom else 0
         size             = { x : @currentElement.outerWidth(), y : @currentElement.outerHeight() + marginBottom + marginTop }
-        position         = { x : originalPosition.left, y : originalPosition.top - marginTop}
+        position         = { x : originalPosition.left, y : originalPosition.top - marginTop - winTop}
 
         @_setMask(position, size)
 
         scrollTopOffset = if @tooltip.hasClass('bottom') then @tooltip.offset().top - size.y - 20 else @tooltip.offset().top - 10
-    
-        $('html, body').stop().animate
-          scrollTop: scrollTopOffset - 20
-        , 500
+        
+        unless (!!@currentStepElement.fixed)
+          $('html, body').stop().animate
+            scrollTop: scrollTopOffset - 20
+          , 500
+        
+        setTimeout =>
+          @tooltip.find(".#{@options.prefix}-step-next").focus()
+          @tooltip.find(".#{@options.prefix}-step-close").focus()
+        , 50
     
       else
         # reset elems
@@ -356,7 +383,7 @@
     start : ->
     
       unless @started
-        $(document.body).trigger("#{@options.prefix}Started")
+        $(document.body).trigger("#{@options.prefix}Started").addClass("#{@options.prefix}-body-on")
         @_setDocumentHeight()
         @started = true
         @masks.wrapper.show().stop().fadeTo(500,1)
@@ -382,7 +409,7 @@
       @tooltip.find(".#{@options.prefix}-step-hide").tooltip('hide')
       @masks.wrapper.stop().fadeTo 500, 0, => 
         @masks.wrapper.hide()
-        $(document.body).trigger("#{@options.prefix}Closed")
+        $(document.body).trigger("#{@options.prefix}Closed").removeClass("#{@options.prefix}-body-on")
       @
   
   # make it available by calling $.pageTour(steps /* [] <= Array*/, options /* {} <= Object*/)
